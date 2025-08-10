@@ -52,19 +52,9 @@ A simple Amazon-like storefront built with HTML, CSS, and modern JavaScript (ES 
 
 You can run this as a static site. Because ES modules are used, serving over HTTP is recommended.
 
-### Option A: VS Code Live Server (recommended)
+### VS Code Live Server
 - Install the Live Server extension
 - Right-click `amazon.html` → "Open with Live Server"
-
-### Option B: Python simple server
-```bash
-# From the project root
-python3 -m http.server 5173
-# Then open http://localhost:5173/amazon.html in your browser
-```
-
-### Option C: Any static server
-- Serve the project root, then navigate to `amazon.html` and `checkout.html`
 
 ## How It Works
 
@@ -93,26 +83,8 @@ python3 -m http.server 5173
 - Cart state is saved in `localStorage` to persist across page reloads.
 - Delivery date calculation is business-day aware (skips Friday and Saturday by design in this project).
 
-## Development Tips
+## Roadmap
 
-- Add a new product by updating `data/products.js` and placing images in `images/products/`.
-- If you change class names in HTML, also update selectors in the corresponding JS files.
-- Keep modules small and focused; UI modules should delegate to data modules.
+- Orders page (`orders.html`):
+- Tracking page (`tracking.html`):
 
-## Troubleshooting
-
-- Module import or CORS errors:
-  - Serve the project over HTTP (Live Server or `python3 -m http.server`).
-- Empty product grid:
-  - Check `data/products.js` export and image paths.
-- Cart count not updating on checkout:
-  - Ensure `checkout.html` has `.js-checkout-header-middle-section` and the checkout header script runs.
-- Totals look wrong:
-  - Confirm each cart item has a valid `deliveryOptionId` and product price.
-
-## Roadmap (Ideas)
-
-- Search and filters on the catalog page
-- Order history persistence
-- Mobile UI polish and accessibility improvements
-- API-backed product/catalog loading
