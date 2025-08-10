@@ -29,6 +29,10 @@ describe('test suite : renderOrderSummary', () => {
     renderOrderSummary();
   });
 
+  afterEach(() => {
+    document.querySelector('.js-test-container').innerHTML = ``;
+  });
+
   it('displays the cart', () => {
     expect(
       document.querySelectorAll('.js-cart-item-container').length
@@ -39,8 +43,21 @@ describe('test suite : renderOrderSummary', () => {
     expect(
       document.querySelector(`.js-product-quantity-${productId2}`).innerText
     ).toContain('Quantity: 1');
+    expect(
+      document.querySelector(`.js-product-name-${productId1}`).innerText
+    ).toEqual('Black and Gray Athletic Cotton Socks - 6 Pairs');
+    expect(
+      document.querySelector(`.js-product-name-${productId2}`).innerText
+    ).toEqual('Intermediate Size Basketball');
+    expect(
+      document.querySelector(`.js-product-price-${productId1}`).innerText
+    ).toContain('$10.90');
+    expect(
+      document.querySelector(`.js-product-price-${productId2}`).innerText
+    ).toContain('$20.95');
 
-    document.querySelector('.js-test-container').innerHTML = ``;
+
+    //document.querySelector('.js-test-container').innerHTML = ``;
   });
 
   it('removes a product', () => {
@@ -61,5 +78,26 @@ describe('test suite : renderOrderSummary', () => {
       cart[0].productId
     ).toEqual(productId2);
   });
-  document.querySelector('.js-test-container').innerHTML = ``;
+  //document.querySelector('.js-test-container').innerHTML = ``;
+
+  it('update delivery option', () => {
+   const deliveryOption3 = document.querySelector(`.js-delivery-option-${productId1}-${'3'}`);
+   deliveryOption3.click();
+   expect(
+    deliveryOption3.checked
+   ).toEqual(true);
+   expect(
+    cart[0].productId
+   ).toEqual(productId1);
+   expect(
+    cart[0].deliveryOptionId
+   ).toEqual('3');
+   expect(
+    cart.length
+   ).toEqual(2);
+   const shippingPrice = document.querySelector('.js-shipping-price');
+   const totalPrice = document.querySelector('.js-total-price');
+   expect(shippingPrice.innerText).toEqual('$14.98');
+   expect(totalPrice.innerText).toEqual('$63.50');
+  });
 });

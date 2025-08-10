@@ -11,5 +11,11 @@ describe('test suite : formatCurreny', () => {
 
   it('round up to nearest cent', () => {
     expect(formatCurreny(2000.5)).toEqual('20.01');
+  });
+  it('rounds down to neares integer', () => {
+    expect(formatCurreny(2000.4)).toEqual('20.00');
+  });
+  it('negative number', () => {
+    expect(formatCurreny(-100)).toEqual('-1.00');
   })
 });
